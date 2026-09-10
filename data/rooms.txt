@@ -1,0 +1,10 @@
+A201|A|800000|2|TRONG|Phong Deluxe huong bien
+A202|A|800000|2|DANG_O|Phong Deluxe huong bien
+A203|A|800000|3|TRONG|Phong Deluxe gia dinh
+A305|A|900000|2|BAO_TRI|Phong Suite tang cao
+B101|B|500000|2|TRONG|Phong Standard
+B102|B|500000|2|TRONG|Phong Standard
+B205|B|550000|3|TRONG|Phong Standard rong
+C101|C|300000|2|TRONG|Phong tiet kiem
+C102|C|300000|2|TRONG|Phong tiet kiem
+C303|C|320000|4|TRONG|Phong tap the

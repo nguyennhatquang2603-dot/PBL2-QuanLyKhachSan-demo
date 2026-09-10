@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quản lý khách sạn - PBL2</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🏨</span>
+    <div>
+      <h1>Quản lý khách sạn</h1>
+      <p>Đồ án PBL2 &middot; phiên bản website</p>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-view="rooms">Danh sách phòng</button>
+    <button class="tab" data-view="bookings">Đặt phòng &amp; Check-in/out</button>
+    <button class="tab" data-view="services">Dịch vụ bổ sung</button>
+    <button class="tab" data-view="stats">Thống kê lợi nhuận</button>
+  </nav>
+</header>
+
+<main id="app">
+  <!-- ============ PHÒNG ============ -->
+  <section id="view-rooms" class="view active">
+    <div class="view-head">
+      <h2>Danh sách phòng</h2>
+      <div class="actions">
+        <select id="room-filter">
+          <option value="">Tất cả trạng thái</option>
+          <option value="TRONG">Trống</option>
+          <option value="DANG_O">Đang ở</option>
+          <option value="BAO_TRI">Bảo trì</option>
+        </select>
+        <button class="btn primary" id="btn-add-room">+ Thêm phòng</button>
+      </div>
+    </div>
+    <div id="room-summary" class="summary"></div>
+    <div id="room-grid" class="room-grid"></div>
+  </section>
+
+  <!-- ============ ĐẶT PHÒNG ============ -->
+  <section id="view-bookings" class="view">
+    <div class="view-head">
+      <h2>Đặt phòng &amp; Check-in / Check-out</h2>
+      <div class="actions">
+        <select id="booking-filter">
+          <option value="">Tất cả</option>
+          <option value="DA_DAT">Đã đặt</option>
+          <option value="DANG_O">Đang ở</option>
+          <option value="DA_TRA">Đã trả</option>
+          <option value="DA_HUY">Đã hủy</option>
+        </select>
+        <button class="btn primary" id="btn-add-booking">+ Tạo đặt phòng</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="booking-table">
+        <thead>
+          <tr>
+            <th>Mã</th><th>Khách hàng</th><th>Phòng</th><th>Nhận</th><th>Trả</th>
+            <th class="num">Đêm</th><th class="num">Tiền cọc</th><th>Trạng thái</th><th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ DỊCH VỤ ============ -->
+  <section id="view-services" class="view">
+    <div class="view-head">
+      <h2>Dịch vụ bổ sung</h2>
+      <div class="actions">
+        <select id="service-filter">
+          <option value="">Tất cả nhóm</option>
+          <option value="THUC_AN">Thức ăn</option>
+          <option value="NUOC_UONG">Nước uống</option>
+          <option value="SPA">Spa / Massage</option>
+          <option value="KHAC">Khác</option>
+        </select>
+        <button class="btn primary" id="btn-add-service">+ Thêm dịch vụ</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="service-table">
+        <thead>
+          <tr>
+            <th>Mã</th><th>Tên dịch vụ</th><th>Nhóm</th><th class="num">Đơn giá</th>
+            <th class="num">Giá vốn</th><th class="num">Lợi nhuận/ĐV</th><th>ĐVT</th><th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ THỐNG KÊ ============ -->
+  <section id="view-stats" class="view">
+    <div class="view-head">
+      <h2>Thống kê lợi nhuận</h2>
+      <div class="actions">
+        <label>Từ <input type="date" id="stat-from" /></label>
+        <label>Đến <input type="date" id="stat-to" /></label>
+        <button class="btn" id="btn-stat-month">Tháng này</button>
+        <button class="btn" id="btn-stat-all">Tất cả</button>
+        <button class="btn primary" id="btn-stat-run">Xem</button>
+      </div>
+    </div>
+    <p class="hint">Chỉ tính các lượt đặt đã <strong>check-out</strong>, lọc theo ngày trả phòng.
+       Lợi nhuận dịch vụ = doanh thu &minus; giá vốn. Tiền phòng tính là lợi nhuận gộp.</p>
+    <div id="stat-kpi" class="kpi-grid"></div>
+    <div class="stat-cols">
+      <div class="table-wrap">
+        <h3>Theo loại phòng</h3>
+        <table id="stat-room-table">
+          <thead><tr><th>Loại</th><th class="num">Doanh thu</th><th class="num">Lượt</th><th class="num">Đêm</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <h3>Theo nhóm dịch vụ</h3>
+        <table id="stat-service-table">
+          <thead><tr><th>Nhóm</th><th class="num">Doanh thu</th><th class="num">Giá vốn</th><th class="num">Lợi nhuận</th><th class="num">SL</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="modal-overlay" class="overlay hidden">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">Tiêu đề</h3>
+      <button class="modal-close" id="modal-close">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
